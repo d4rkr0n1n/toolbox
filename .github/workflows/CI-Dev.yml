@@ -1,11 +1,12 @@
 name: CI-Dev
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "dev" , "main" ]
   workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     permissions:
       contents: write
       packages: write
@@ -16,24 +17,21 @@ jobs:
         run: |
           echo "version=v0.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`" >> $GITHUB_OUTPUT
       - name: Get Tags
+        if: ${{ github.ref == 'main' }}
         id: tags
         run: |
           git fetch --tags
-          echo "Tags fetched"      
-      - name: Get Latest Tag
-        id: latest-tag
-        run: |
           latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
           extracted_digit=$(echo "$latest_tag" | awk -F'[v.]' '{print $2}')
           echo "$extracted_digit"
-          
-      # - name: Create Release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: ${{ steps.extract_version.outputs.version }}
-      #     release_name: Dev Release ${{ steps.extract_version.outputs.version }}
-      #     draft: false
-      #     prerelease: false
+          echo "version=v`expr $extracted_digit+1`.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`" >> $GITHUB_OUTPUT
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.extract_version.outputs.version }}
+          release_name: Release ${{ steps.extract_version.outputs.version }}
+          draft: false
+          prerelease: false
