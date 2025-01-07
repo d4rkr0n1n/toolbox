@@ -1,4 +1,4 @@
-name: CI
+name: CI-Dev
 on:
   push:
     branches: [ "dev" ]
@@ -14,8 +14,8 @@ jobs:
       - name: Get version
         id: extract_version
         run: |
-          echo $(git describe --tags --abbrev=0)
-          echo "version=v0.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`-DEV" >> $GITHUB_OUTPUT
+          echo $(git tag | tail -n 1)
+          echo "version=v0.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`" >> $GITHUB_OUTPUT
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -23,6 +23,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.extract_version.outputs.version }}
-          release_name: Release ${{ steps.extract_version.outputs.version }}
+          release_name: Dev Release ${{ steps.extract_version.outputs.version }}
           draft: false
           prerelease: false
