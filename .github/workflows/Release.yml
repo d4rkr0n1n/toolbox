@@ -1,4 +1,4 @@
-name: CI-Dev
+name: Release
 on:
   push:
     branches: [ "dev" , "main" ]
@@ -27,6 +27,7 @@ jobs:
           new_version=$(($extracted_digit+1))
           echo "version=v$new_version.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`" >> $GITHUB_OUTPUT
       - name: Create Release
+        if: ${{ github.ref_name == 'dev' }}
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -34,5 +35,16 @@ jobs:
         with:
           tag_name: ${{ steps.extract_version.outputs.version }}
           release_name: Release ${{ steps.extract_version.outputs.version }}
+          draft: false
+          prerelease: false
+      - name: Create Release
+        if: ${{ github.ref_name == 'main' }}
+        id: create_release-1
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tags.outputs.version }}
+          release_name: Release ${{ steps.tags.outputs.version }}
           draft: false
           prerelease: false
