@@ -14,8 +14,18 @@ jobs:
       - name: Get version
         id: extract_version
         run: |
-          git tag | tail -n 1
           echo "version=v0.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`" >> $GITHUB_OUTPUT
+      - name: Get Tags
+        id: tags
+        run: |
+          git fetch --tags
+          echo "Tags fetched"      
+      - name: Get Latest Tag
+        id: latest-tag
+        run: |
+          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+          echo "latest_tag=$latest_tag"
+          
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
