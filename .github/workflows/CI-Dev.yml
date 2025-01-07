@@ -24,7 +24,8 @@ jobs:
           latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
           extracted_digit=$(echo "$latest_tag" | awk -F'[v.]' '{print $2}')
           echo "$extracted_digit"
-          echo "version=v`expr $extracted_digit+1`.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`" >> $GITHUB_OUTPUT
+          new_version=$(($extracted_digit+1))
+          echo "version=v$new_version.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`" >> $GITHUB_OUTPUT
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
