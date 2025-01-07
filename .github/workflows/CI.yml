@@ -14,13 +14,13 @@ jobs:
       - name: Get version
         id: extract_version
         run: echo "version=v0.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`" >> $GITHUB_OUTPUT
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.extract_version.outputs.version }}
-          release_name: Release ${{ steps.extract_version.outputs.version }}
-          draft: false
-          prerelease: false
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ steps.extract_version.outputs.version }}
+      #     release_name: Release ${{ steps.extract_version.outputs.version }}
+      #     draft: false
+      #     prerelease: false
