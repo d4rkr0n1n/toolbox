@@ -24,15 +24,16 @@ jobs:
         id: latest-tag
         run: |
           latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
-          echo "latest_tag=$latest_tag"
+          extracted_digit=$(echo "$latest_tag" | awk -F'[v.]' '{print $2}')
+          echo "$extracted_digit"
           
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.extract_version.outputs.version }}
-          release_name: Dev Release ${{ steps.extract_version.outputs.version }}
-          draft: false
-          prerelease: false
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ steps.extract_version.outputs.version }}
+      #     release_name: Dev Release ${{ steps.extract_version.outputs.version }}
+      #     draft: false
+      #     prerelease: false
