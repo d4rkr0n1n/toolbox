@@ -13,9 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Get version
+        if: ${{ github.ref_name == 'dev' }}
         id: extract_version
         run: |
-          echo "version=v0.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`" >> $GITHUB_OUTPUT
+          git fetch --tags
+          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+          extracted_digit=$(echo "$latest_tag" | awk -F'[v.]' '{print $2}')
+          echo "$extracted_digit"
+          echo "version=v$extracted_digit.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`" >> $GITHUB_OUTPUT
       - name: Get Tags
         if: ${{ github.ref_name == 'main' }}
         id: tags
