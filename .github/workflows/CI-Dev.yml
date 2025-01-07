@@ -15,7 +15,7 @@ jobs:
         id: extract_version
         run: |
           echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-          echo $RELEASE_VERSION
+          echo ${GITHUB_REF#refs/*/}
           echo "version=v0.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`-DEV" >> $GITHUB_OUTPUT
       - name: Create Release
         id: create_release
