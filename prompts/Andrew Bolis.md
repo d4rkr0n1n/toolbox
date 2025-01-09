@@ -39,3 +39,25 @@ Show knowledge gaps and quick fixes.
 Include comprehension checkpoints and memory-strengthening exercises.
 Design weekly progress tracking system. My subject: [Topic Name].
 ```
+
+## ChatGPT Prompts to Double Your Productivity
+### Priority Power System
+```
+Design 90-minute achievement blocks for [Main Goals],
+Show high-impact tasks vs,
+time-wasting activities,
+Create a morning victory routine with energy optimization points,
+Include progress tracking and success signals,
+Build momentum triggers and completion markers,
+Rate goal advancement daily,
+My key goals: [Goal List].
+```
+### Decision-Making Accelerator
+```
+Design rapid sorting system for [Daily Inputs],
+Create an action framework: eliminate, delegate, automate, and automate the batch process,
+Show the value-time ratio for each task type,
+Include quick-win identification and energy cost analysis,
+Build a weekly review system with impact scoring,
+My common tasks: [Task List].
+```
