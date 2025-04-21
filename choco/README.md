@@ -1,4 +1,3 @@
-
 install:
 powershell-core
 set as admin and default
