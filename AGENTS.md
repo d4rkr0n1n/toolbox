@@ -22,6 +22,8 @@ After accepted code changes, review relevant documentation and update affected
 commands, paths, behavior, and usage examples. See
 `.github/skills/auto-update-docs/SKILL.md`.
 
+Use `.github/skills/ui-ux/SKILL.md` when changing interactive terminal scripts.
+
 ## Validation
 
 There is no formal build, package manager, or lint configuration. Run the repository check with:

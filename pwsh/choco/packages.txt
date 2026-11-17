@@ -6,3 +6,4 @@ powershell-core
 python
 starship
 vscode
+kubernetes-helm
