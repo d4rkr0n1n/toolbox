@@ -1,0 +1,8 @@
+docker-desktop
+git
+kind
+kubernetes-cli
+powershell-core
+python
+starship
+vscode

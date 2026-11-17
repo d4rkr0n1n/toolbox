@@ -4,12 +4,23 @@
 
 This repository contains standalone utilities:
 
-- `pwsh/ChocoUpgrade.ps1` elevates PowerShell and upgrades all Chocolatey packages.
-- `pwsh/ChocoSearch.ps1` interactively searches Chocolatey packages.
+- `pwsh/choco/ChocoUpgrade.ps1` elevates PowerShell and upgrades all Chocolatey packages.
+- `pwsh/choco/ChocoSearch.ps1` interactively searches Chocolatey packages.
+- `pwsh/choco/InstallPackages.ps1` installs the packages listed in `pwsh/choco/packages.txt` and skips packages already installed.
 - `test.sh` checks extraction of the major version from a `v<major>.<minor>.<patch>` string.
 - `.github/workflows/Release.yml` creates releases for pushes to `dev` and `main`.
 
 Keep the utilities independent and preserve their existing paths and interactive behavior.
+
+## KISS
+
+Keep scripts simple: prefer direct commands and pipelines over abstractions,
+while retaining only validation that produces a useful error.
+See `.github/skills/kiss/SKILL.md` for the reusable KISS skill.
+
+After accepted code changes, review relevant documentation and update affected
+commands, paths, behavior, and usage examples. See
+`.github/skills/auto-update-docs/SKILL.md`.
 
 ## Validation
 
