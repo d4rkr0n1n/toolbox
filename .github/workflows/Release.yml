@@ -18,19 +18,34 @@ jobs:
         run: |
           git fetch --tags
           latest_tag=$(git tag | tail -n 1)
-          extracted_digit=$(echo "$latest_tag" | awk -F'[v.]' '{print $2}')
-          echo "$extracted_digit"
-          echo "version=v$extracted_digit.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`" >> $GITHUB_OUTPUT
+          major=$(echo "$latest_tag" | awk -F'[v.]' '{print $2}')
+          minor=$(echo "$latest_tag" | awk -F'[v.]' '{print $3}')
+          patch=$(echo "$latest_tag" | awk -F'[v.]' '{print $4}')
+          patch=$((($patch + 1) % 10))
+          if [ $patch -eq 0 ]; then
+            minor=$((($minor + 1) % 10))
+            if [ $minor -eq 0 ]; then
+              major=$((($major + 1) % 10))
+            fi
+          fi
+          echo "version=v$major.$minor.$patch" >> $GITHUB_OUTPUT
       - name: Get Tags
         if: ${{ github.ref_name == 'main' }}
         id: tags
         run: |
           git fetch --tags
           latest_tag=$(git tag | tail -n 1)
-          extracted_digit=$(echo "$latest_tag" | awk -F'[v.]' '{print $2}')
-          echo "$extracted_digit"
-          new_version=$(($extracted_digit+1))
-          echo "version=v$new_version.`expr ${{ github.run_number }} / 10`.`expr ${{ github.run_number }} % 10`" >> $GITHUB_OUTPUT
+          major=$(echo "$latest_tag" | awk -F'[v.]' '{print $2}')
+          minor=$(echo "$latest_tag" | awk -F'[v.]' '{print $3}')
+          patch=$(echo "$latest_tag" | awk -F'[v.]' '{print $4}')
+          patch=$((($patch + 1) % 10))
+          if [ $patch -eq 0 ]; then
+            minor=$((($minor + 1) % 10))
+            if [ $minor -eq 0 ]; then
+              major=$((($major + 1) % 10))
+            fi
+          fi
+          echo "version=v$major.$minor.$patch" >> $GITHUB_OUTPUT
       - name: Create Release
         if: ${{ github.ref_name == 'dev' }}
         id: create_release
