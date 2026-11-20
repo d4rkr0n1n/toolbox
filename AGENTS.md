@@ -4,6 +4,7 @@
 
 This repository contains standalone utilities:
 
+- `pwsh/toolbox.ps1` launches the interactive toolbox menu for Chocolatey and Windows utilities.
 - `pwsh/choco/ChocoUpgrade.ps1` elevates PowerShell and upgrades all Chocolatey packages.
 - `pwsh/choco/ChocoSearch.ps1` interactively searches Chocolatey packages.
 - `pwsh/choco/InstallPackages.ps1` installs the packages listed in `pwsh/choco/packages.txt` and skips packages already installed.
@@ -11,6 +12,16 @@ This repository contains standalone utilities:
 - `.github/workflows/Release.yml` creates releases for pushes to `dev` and `main`.
 
 Keep the utilities independent and preserve their existing paths and interactive behavior.
+
+To use the toolbox in a PowerShell session, add its directory to `PATH` and run
+the menu:
+
+```powershell
+$env:Path += ";E:\Playground\Projects\toolbox\pwsh"
+toolbox.ps1
+```
+
+The PATH change applies only to the current session.
 
 ## KISS
 

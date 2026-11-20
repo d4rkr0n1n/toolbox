@@ -1,5 +1,17 @@
 # toolbox
 
+## Use the toolbox in PowerShell
+
+Add the `pwsh` directory to `PATH` for the current PowerShell session, then run
+the toolbox menu:
+
+```powershell
+$env:Path += ";E:\Playground\Projects\toolbox\pwsh"
+toolbox.ps1
+```
+
+This PATH change applies only to the current session.
+
 ## Chocolatey setup
 
 The package manifest is stored in `pwsh/choco/packages.txt` using one package
