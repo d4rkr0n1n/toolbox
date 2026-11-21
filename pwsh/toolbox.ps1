@@ -19,6 +19,7 @@ function Show-Menu {
   Write-Host "  4. 📢 echo       - Echo hello" -ForegroundColor Green
   Write-Host "  5. 🛑 shutdown   - Shutdown system" -ForegroundColor DarkRed
   Write-Host "  6. 🔄 restart    - Restart system" -ForegroundColor DarkRed
+  Write-Host "  7. 🖥️ description - Show system description" -ForegroundColor Green
   Write-Host ""
   Write-Host "  0. ❌ exit       - Exit toolbox" -ForegroundColor Gray
   Write-Host ""
@@ -46,6 +47,9 @@ function Execute-Command {
     { @("6", "restart") -contains $_ } {
       & "$scriptRoot\win\Restart.ps1"
     }
+    { @("7", "description") -contains $_ } {
+      & "$scriptRoot\win\Description.ps1"
+    }
     { @("0", "exit", "quit") -contains $_ } {
       Write-Host "👋 Exiting toolbox..." -ForegroundColor Cyan
       exit 0
@@ -61,7 +65,7 @@ if ($Command) {
 } else {
   while ($true) {
     Show-Menu
-    $input = Read-Host "Enter command (0-6 or name)"
+    $input = Read-Host "Enter command (0-7 or name)"
     Execute-Command $input
     Write-Host ""
   }

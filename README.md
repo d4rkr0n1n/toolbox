@@ -12,6 +12,15 @@ toolbox.ps1
 
 This PATH change applies only to the current session.
 
+## Windows system description
+
+Display the computer name, manufacturer, model, and Windows version details
+from the toolbox menu using option `7` or the `description` command:
+
+```powershell
+.\pwsh\win\Description.ps1
+```
+
 ## Chocolatey setup
 
 The package manifest is stored in `pwsh/choco/packages.txt` using one package
