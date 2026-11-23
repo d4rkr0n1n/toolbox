@@ -4,6 +4,7 @@
 
 This repository contains standalone utilities:
 
+- `python/toolbox.py` displays basic system information using the Python standard library.
 - `pwsh/toolbox.ps1` launches the interactive toolbox menu for Chocolatey and Windows utilities.
 - `pwsh/choco/ChocoUpgrade.ps1` elevates PowerShell and upgrades all Chocolatey packages.
 - `pwsh/choco/ChocoSearch.ps1` interactively searches Chocolatey packages.
@@ -12,6 +13,12 @@ This repository contains standalone utilities:
 - `.github/workflows/Release.yml` creates releases for pushes to `dev` and `main`.
 
 Keep the utilities independent and preserve their existing paths and interactive behavior.
+
+Run the Python system-information utility with:
+
+```powershell
+python .\python\toolbox.py
+```
 
 To use the toolbox in a PowerShell session, add its directory to `PATH` and run
 the menu:

@@ -12,6 +12,15 @@ toolbox.ps1
 
 This PATH change applies only to the current session.
 
+## Python system information
+
+Run the Python utility to display the computer name, operating system, version,
+architecture, and Python version:
+
+```powershell
+python .\python\toolbox.py
+```
+
 ## Windows system description
 
 Display the computer name, manufacturer, model, and Windows version details
